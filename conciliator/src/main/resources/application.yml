@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: conciliator
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/
+    instance:
+      preferIpAddress: true
+    healthcheck:
+      enabled: true
+server:
+  port: 9003

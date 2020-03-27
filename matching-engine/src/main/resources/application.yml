@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: matching-engine
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/
+    instance:
+      preferIpAddress: true
+    healthcheck:
+      enabled: true
+server:
+  port: 9002
