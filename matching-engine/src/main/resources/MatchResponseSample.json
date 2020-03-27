@@ -1,0 +1,39 @@
+// Falla:
+​
+{
+  "emparejador_id":1,
+  "respuestas":[
+    {
+      "venta":"venta_123",
+      "compras":[
+        "compra_1",
+        "compra_2"
+      ],
+      "emparejadores_que_coinciden":8
+    },
+    {
+      "venta":"venta_123",
+      "compras":[
+        "compra_1",
+        "compra_6"
+      ],
+      "emparejadores_que_coinciden":2
+    }
+  ]
+}
+​
+// Respuesta OK
+//​
+//{
+//  "emparejador_id": 1,
+//  "respuestas": [
+//    {
+//      "venta": "venta_123",
+//      "compras": [
+//        "compra_1",
+//        "compra_2"
+//      ],
+//      "emparejadores_que_coinciden": 10
+//    }
+//  ]
+//}
