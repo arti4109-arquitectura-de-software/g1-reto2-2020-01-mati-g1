@@ -1,6 +1,5 @@
 package co.edu.uniandes.tianguix.engine.entrypoint;
 
-import co.edu.uniandes.tianguix.engine.model.CommunicationException;
 import co.edu.uniandes.tianguix.engine.model.MatchingResponse;
 import co.edu.uniandes.tianguix.engine.model.Order;
 import co.edu.uniandes.tianguix.engine.useCases.SendMatchingResult;
@@ -37,11 +36,12 @@ public class MachineEngineReceptor {
     @PostMapping
     public ResponseEntity processOrder(@RequestBody Order arrivedOrder){
         arrivedOrder.setProcessId(processedOrderId++);
-        String result = null;
+        MatchingResponse result = null;
         try {
             result = sendMatchingResult.sendResultToCollector(arrivedOrder);
             return ResponseEntity.ok().body(result);
-        } catch (CommunicationException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
         }
     }
