@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient("MATCHING-ENGINE")
 public interface MatchingEngineRestClient {
 
-    @PostMapping("/machine-engine/v1/perform-match/")
+    @PostMapping("/machine-engine/v1/match/")
     OrderDTO processOrder(OrderDTO order);
 }
