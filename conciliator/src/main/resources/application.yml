@@ -28,3 +28,9 @@ management:
 
 notification:
   slack-url: https://hooks.slack.com/services/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
+
+influx:
+  db:
+    host: localhost:8086
+    username: tianguix
+    password: tianguix

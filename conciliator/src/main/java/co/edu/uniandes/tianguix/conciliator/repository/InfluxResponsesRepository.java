@@ -1,0 +1,35 @@
+package co.edu.uniandes.tianguix.conciliator.repository;
+
+import co.edu.uniandes.tianguix.conciliator.model.Response;
+import org.influxdb.InfluxDB;
+import org.influxdb.InfluxDBFactory;
+import org.influxdb.dto.Point;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.time.ZoneId;
+import java.util.concurrent.TimeUnit;
+
+@Service
+public class InfluxResponsesRepository implements ResponsesRepository {
+
+    @Value("${influx.db.host}") private String databaseHost;
+    @Value("${influx.db.username}") private String databaseUsername;
+    @Value("${influx.db.password}") private String databasePassword;
+
+    @Override
+    public void save(Response response){
+        InfluxDB influxDB = connectToDB();
+        Point point = Point.measurement("responses")
+            .time(response.getLocalDateTime().atZone(ZoneId.systemDefault()).toEpochSecond(), TimeUnit.MILLISECONDS)
+            .addField("response", response.getType().name())
+            .build();
+        influxDB.write(point);
+        influxDB.disableBatch();
+        influxDB.close();
+    }
+
+    private InfluxDB connectToDB(){
+        return InfluxDBFactory.connect(databaseHost, databaseUsername, databasePassword);
+    }
+}

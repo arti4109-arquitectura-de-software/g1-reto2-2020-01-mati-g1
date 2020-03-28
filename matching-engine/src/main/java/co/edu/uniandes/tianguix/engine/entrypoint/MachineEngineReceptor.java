@@ -3,6 +3,8 @@ package co.edu.uniandes.tianguix.engine.entrypoint;
 import co.edu.uniandes.tianguix.engine.model.MatchingResponse;
 import co.edu.uniandes.tianguix.engine.model.Order;
 import co.edu.uniandes.tianguix.engine.useCases.SendMatchingResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,7 @@ public class MachineEngineReceptor {
     // -----------------------------------------------------------------------------------------------------------------
     static int processedOrderId = 0;
     SendMatchingResult sendMatchingResult;
+    @Autowired private Environment environment;
 
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -35,6 +38,7 @@ public class MachineEngineReceptor {
 
     @PostMapping
     public ResponseEntity processOrder(@RequestBody Order arrivedOrder){
+        System.out.println("INSTANCE ID:" + environment.getProperty("eureka.instance.instance-id"));
         arrivedOrder.setProcessId(processedOrderId++);
         MatchingResponse result = null;
         try {
