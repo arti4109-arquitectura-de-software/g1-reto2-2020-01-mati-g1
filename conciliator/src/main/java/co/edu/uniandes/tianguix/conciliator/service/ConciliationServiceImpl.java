@@ -5,7 +5,7 @@ import co.edu.uniandes.tianguix.conciliator.model.FailureNotification;
 import co.edu.uniandes.tianguix.conciliator.model.Match;
 import co.edu.uniandes.tianguix.conciliator.model.MatchingEngineResponse;
 import co.edu.uniandes.tianguix.conciliator.repository.ConciliationRepository;
-import co.edu.uniandes.tianguix.conciliator.repository.FailuresRepository;
+import co.edu.uniandes.tianguix.conciliator.repository.ResponsesRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class ConciliationServiceImpl implements ConciliationService {
 	// Attributes
 	// -----------------------------------------------------------------------------------------------------------------
 
-	private final FailuresRepository failuresRepository;
+	private final ResponsesRepository responsesRepository;
 	private final ConciliationRepository conciliationRepository;
 
 	private final DiscoveryService discoveryService;
