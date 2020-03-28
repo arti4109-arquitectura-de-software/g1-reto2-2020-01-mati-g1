@@ -2,7 +2,11 @@ server:
   port: 9001
 
 eureka:
+  instance:
+    health-check-url: https://${eureka.hostname}/actuator/health
   client:
+    healthcheck:
+      enabled: true
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
