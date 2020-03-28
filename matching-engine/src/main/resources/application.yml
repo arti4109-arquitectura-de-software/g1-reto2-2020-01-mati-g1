@@ -2,12 +2,25 @@ spring:
   application:
     name: matching-engine
 eureka:
+  instance:
+    instance-id: ${spring.application.name}-${server.port}
+    hostname: localhost
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
   client:
     serviceUrl:
       defaultZone: http://localhost:9001/eureka/
-    instance:
-      preferIpAddress: true
     healthcheck:
       enabled: true
+
 server:
-  port: 9002
+  port: 9003
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
