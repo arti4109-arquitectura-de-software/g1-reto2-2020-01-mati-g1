@@ -11,7 +11,7 @@ import lombok.With;
 public class OrderDTO {
 
     @With
-    private int orderId;
+    private String orderId;
     @With
     private OrderType type;
     @With
