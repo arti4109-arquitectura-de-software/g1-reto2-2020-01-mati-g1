@@ -9,5 +9,11 @@ import co.edu.uniandes.tianguix.conciliator.model.MatchingEngineResponse;
 @FunctionalInterface
 public interface ConciliationService {
 
+	/**
+	 * The method should receive a matching engine response and verify if all
+	 * the conditions are fulfilled in order to proceed with the order materialization
+	 *
+	 * @param response an incoming {@link MatchingEngineResponse}
+	 */
 	void conciliate(MatchingEngineResponse response);
 }
