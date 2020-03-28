@@ -1,6 +1,7 @@
 package co.edu.uniandes.tianguix.conciliator.service;
 
 import co.edu.uniandes.tianguix.conciliator.model.Conciliation;
+import co.edu.uniandes.tianguix.conciliator.model.FailureNotification;
 import co.edu.uniandes.tianguix.conciliator.model.Match;
 import co.edu.uniandes.tianguix.conciliator.model.MatchingEngineResponse;
 import co.edu.uniandes.tianguix.conciliator.repository.ConciliationRepository;
@@ -8,6 +9,8 @@ import co.edu.uniandes.tianguix.conciliator.repository.FailuresRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  * @author <a href="mailto:daniel.bellon@payulatam.com"> Daniel Bellón </a>
@@ -22,9 +25,11 @@ public class ConciliationServiceImpl implements ConciliationService {
 	// Attributes
 	// -----------------------------------------------------------------------------------------------------------------
 
-	private final ConciliationRepository conciliationRepository;
 	private final FailuresRepository failuresRepository;
+	private final ConciliationRepository conciliationRepository;
+
 	private final DiscoveryService discoveryService;
+	private final NotificationService notificationService;
 
 	// -----------------------------------------------------------------------------------------------------------------
 	// Methods
@@ -58,7 +63,10 @@ public class ConciliationServiceImpl implements ConciliationService {
 		if (conciliation.thereWasConsensus()) {
 			// TODO: 28/03/20 materialize match
 		} else {
-			// Notify to slack
+			// Notifying the failure ...
+			notifyConciliationFailure(conciliation);
+
+			// materializing the match with higher voting ...
 			var optionalMatch = conciliation.getMatchWithHigherVoting();
 			optionalMatch.ifPresentOrElse(
 					this::materializeMatch,
@@ -68,6 +76,23 @@ public class ConciliationServiceImpl implements ConciliationService {
 
 	private void materializeMatch(Match match) {
 
+	}
+
+	private void notifyConciliationFailure(Conciliation conciliation) {
+
+		conciliation.getResponsesWithoutConsensus().forEach(
+				response -> notificationService.notify(makeFailureNotification(response)));
+	}
+
+	private FailureNotification makeFailureNotification(MatchingEngineResponse response) {
+
+		var optionalOrderId = response.getMatches().stream().findFirst().map(Match::getOrderId);
+		var orderId = optionalOrderId.orElse("No order Id retrieved");
+
+		return new FailureNotification()
+				.withLocalDateTime(LocalDateTime.now())
+				.withOrderId(orderId)
+				.withMatchingEngineId(response.getMatchingEngineId());
 	}
 
 }

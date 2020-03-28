@@ -47,6 +47,14 @@ public class Conciliation {
 				.max(comparingInt(Match::getVotes));
 	}
 
+	public List<MatchingEngineResponse> getResponsesWithoutConsensus() {
+
+		return responsesToReconcile
+				.stream()
+				.filter(response -> !response.thereWasConsensus())
+				.collect(Collectors.toList());
+	}
+
 	// -----------------------------------------------------------------------------------------------------------------
 	// Inner logic
 	// -----------------------------------------------------------------------------------------------------------------
