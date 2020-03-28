@@ -11,7 +11,7 @@
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": "*Matching Engine Id:*\n${matchingEngineId}\n*When:*\n${date}\n*Order Id:*\n ${orderId}"
+        "text": "*Matching Engine Id:*\nmatchingEngineId\n*When:*\ndate\n*Order Id:*\n orderId"
       },
       "accessory": {
         "type": "image",

@@ -1,14 +1,10 @@
 package co.edu.uniandes.tianguix.engine.entrypoint;
 
-
 import co.edu.uniandes.tianguix.engine.model.TianguixFeature;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.togglz.core.Feature;
 import org.togglz.core.manager.FeatureManager;
-
-import java.util.Set;
 
 @Controller
 public class FeaturesFlagManager {

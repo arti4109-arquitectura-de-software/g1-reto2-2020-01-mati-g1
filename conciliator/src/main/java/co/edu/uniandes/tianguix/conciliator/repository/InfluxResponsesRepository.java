@@ -19,11 +19,12 @@ public class InfluxResponsesRepository implements ResponsesRepository {
 
     @Override
     public void save(Response response){
-        InfluxDB influxDB = connectToDB();
-        Point point = Point.measurement("responses")
+        var influxDB = connectToDB();
+        var point = Point.measurement("responses")
             .time(response.getLocalDateTime().atZone(ZoneId.systemDefault()).toEpochSecond(), TimeUnit.MILLISECONDS)
             .addField("response", response.getType().name())
             .build();
+
         influxDB.write(point);
         influxDB.disableBatch();
         influxDB.close();
