@@ -8,8 +8,8 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  * @author <a href="mailto:d.bellonc@uniandes.edu.co"> Daniel Bellón </a>
  * @since 0.0.1
  */
-@SpringBootApplication
 @EnableEurekaServer
+@SpringBootApplication
 public class Registry {
 
 	public static void main(String[] args) {

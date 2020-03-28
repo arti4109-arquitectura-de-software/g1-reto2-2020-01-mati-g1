@@ -1,6 +1,7 @@
 spring:
   application:
     name: conciliator
+
 eureka:
   client:
     serviceUrl:
@@ -9,5 +10,6 @@ eureka:
       preferIpAddress: true
     healthcheck:
       enabled: true
+
 server:
   port: 9003
