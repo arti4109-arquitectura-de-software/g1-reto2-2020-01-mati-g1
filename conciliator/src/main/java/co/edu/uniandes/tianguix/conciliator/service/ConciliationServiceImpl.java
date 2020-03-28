@@ -29,7 +29,6 @@ public class ConciliationServiceImpl implements ConciliationService {
 
 	private final ResponsesRepository responsesRepository;
 	private final ConciliationRepository conciliationRepository;
-
 	private final DiscoveryService discoveryService;
 	private final NotificationService notificationService;
 
@@ -88,5 +87,4 @@ public class ConciliationServiceImpl implements ConciliationService {
 				.withOrderId(orderId)
 				.withMatchingEngineId(response.getMatchingEngineId());
 	}
-
 }

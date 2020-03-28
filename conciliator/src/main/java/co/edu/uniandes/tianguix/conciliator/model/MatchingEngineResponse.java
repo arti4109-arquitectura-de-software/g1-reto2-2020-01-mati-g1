@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.With;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Model that represents the response returned by the Matching Engine,
@@ -44,6 +45,6 @@ public class MatchingEngineResponse {
 
 	public boolean thereWasConsensus() {
 
-		return true;
+		return matches.stream().distinct().count() == 1;
 	}
 }

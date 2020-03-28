@@ -19,5 +19,4 @@ public class Conciliator {
 		var context = SpringApplication.run(Conciliator.class, args);
 		context.addApplicationListener(applicationEvent -> log.error("OFF --> {}", applicationEvent.toString()));
 	}
-
 }

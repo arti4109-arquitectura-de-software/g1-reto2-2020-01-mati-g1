@@ -1,0 +1,57 @@
+{
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "There was a matching error in *Tianguix*"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Matching Engine Id:*\n${matchingEngineId}\n*When:*\n${date}\n*Order Id:*\n ${orderId}"
+      },
+      "accessory": {
+        "type": "image",
+        "image_url": "https://s3.amazonaws.com/vu-web/wp-content/uploads/20160810143712/alert-icon-red-11.png",
+        "alt_text": "computer thumbnail"
+      }
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "emoji": true,
+            "text": "Approve"
+          },
+          "style": "primary",
+          "value": "click_me_123"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "emoji": true,
+            "text": "Deny"
+          },
+          "style": "danger",
+          "value": "click_me_123"
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "For more info, contact <support@tianguix.com>"
+        }
+      ]
+    }
+  ]
+}
