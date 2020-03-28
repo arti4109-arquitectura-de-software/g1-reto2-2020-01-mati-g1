@@ -4,6 +4,8 @@ import co.edu.uniandes.tianguix.conciliator.model.Conciliation;
 import co.edu.uniandes.tianguix.conciliator.model.FailureNotification;
 import co.edu.uniandes.tianguix.conciliator.model.Match;
 import co.edu.uniandes.tianguix.conciliator.model.MatchingEngineResponse;
+import co.edu.uniandes.tianguix.conciliator.model.Response;
+import co.edu.uniandes.tianguix.conciliator.model.Type;
 import co.edu.uniandes.tianguix.conciliator.repository.ConciliationRepository;
 import co.edu.uniandes.tianguix.conciliator.repository.ResponsesRepository;
 import lombok.RequiredArgsConstructor;
@@ -60,22 +62,14 @@ public class ConciliationServiceImpl implements ConciliationService {
 
 	private void doReconciliation(Conciliation conciliation) {
 
+		var response = new Response().withLocalDateTime(LocalDateTime.now());
+
 		if (conciliation.thereWasConsensus()) {
-			// TODO: 28/03/20 materialize match
+			responsesRepository.save(response.withType(Type.SUCCESS));
 		} else {
-			// Notifying the failure ...
+			responsesRepository.save(response.withType(Type.FAIL));
 			notifyConciliationFailure(conciliation);
-
-			// materializing the match with higher voting ...
-			var optionalMatch = conciliation.getMatchWithHigherVoting();
-			optionalMatch.ifPresentOrElse(
-					this::materializeMatch,
-					() -> log.error("there was no match to save for order with id '{}'", conciliation.getOrderId()));
 		}
-	}
-
-	private void materializeMatch(Match match) {
-
 	}
 
 	private void notifyConciliationFailure(Conciliation conciliation) {
