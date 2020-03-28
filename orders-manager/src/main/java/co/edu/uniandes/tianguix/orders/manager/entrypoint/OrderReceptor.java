@@ -4,8 +4,6 @@ import co.edu.uniandes.tianguix.orders.manager.model.OrderDTO;
 import co.edu.uniandes.tianguix.orders.manager.rest.MatchingEngineRestClient;
 import co.edu.uniandes.tianguix.orders.manager.service.DiscoveryService;
 import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @SuppressWarnings("rawtypes")
@@ -22,7 +21,6 @@ public class OrderReceptor {
     // -----------------------------------------------------------------------------------------------------------------
     // Attributes
     // -----------------------------------------------------------------------------------------------------------------
-    static int processedOrderId = 0;
     private final MatchingEngineRestClient client;
     private final DiscoveryService discoveryService;
 
@@ -41,6 +39,7 @@ public class OrderReceptor {
 
     @PostMapping
     public ResponseEntity processOrder(@RequestBody OrderDTO arrivedOrder) {
+        arrivedOrder.setOrderId(UUID.randomUUID().toString());
         List<InstanceInfo> matchingEngineInstances = discoveryService.getMatchingEngineInstances();
         matchingEngineInstances.forEach(instanceInfo -> {
             System.out.println("Sending order to " + instanceInfo.getInstanceId());
