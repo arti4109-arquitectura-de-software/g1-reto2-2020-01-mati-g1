@@ -22,8 +22,8 @@ public class EurekaDiscoveryService implements DiscoveryService {
 	@Override
 	public Integer getMatchingEngineInstances() {
 
-		var instances = Optional.ofNullable(eurekaClient.getApplication("MATCHING-ENGINE").getInstances());
-		return instances.map(List::size).orElse(0);
+		var optionalEngine = Optional.ofNullable(eurekaClient.getApplication("MATCHING-ENGINE"));
+		return optionalEngine.map(engine -> engine.getInstances().size()).orElse(0);
 	}
 
 }

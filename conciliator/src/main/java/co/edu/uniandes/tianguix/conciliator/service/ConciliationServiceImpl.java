@@ -44,7 +44,7 @@ public class ConciliationServiceImpl implements ConciliationService {
 
 		conciliationRepository.addResponse(response);
 
-		var orderId = response.getMatches().stream().findFirst().map(Match::getOrderId).orElse("");
+		var orderId = response.getMatches().stream().findFirst().map(Match::getOrderID).orElse("");
 		var optionalConciliation = conciliationRepository.getConciliation(orderId);
 		var matchingEngineInstances = discoveryService.getMatchingEngineInstances();
 
@@ -66,7 +66,7 @@ public class ConciliationServiceImpl implements ConciliationService {
 		if (conciliation.thereWasConsensus()) {
 			responsesRepository.save(response.withType(Type.SUCCESS));
 		} else {
-			responsesRepository.save(response.withType(Type.FAIL));
+//			responsesRepository.save(response.withType(Type.FAIL));
 			notifyConciliationFailure(conciliation);
 		}
 	}
@@ -79,7 +79,7 @@ public class ConciliationServiceImpl implements ConciliationService {
 
 	private FailureNotification makeFailureNotification(MatchingEngineResponse response) {
 
-		var optionalOrderId = response.getMatches().stream().findFirst().map(Match::getOrderId);
+		var optionalOrderId = response.getMatches().stream().findFirst().map(Match::getOrderID);
 		var orderId = optionalOrderId.orElse("No order Id retrieved");
 
 		return new FailureNotification()

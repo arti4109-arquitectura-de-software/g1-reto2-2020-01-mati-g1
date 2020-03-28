@@ -23,7 +23,7 @@ public class Match {
 	/**
 	 * The identifier for the requested operation
 	 */
-	@With private String orderId;
+	@With private String orderID;
 
 	/**
 	 * The requested operation type, for instance SALE or PURCHASE
@@ -32,7 +32,7 @@ public class Match {
 
 	/**
 	 * A Collection with the identifiers for all the orders
-	 * that do match with the {@link Match#orderId}
+	 * that do match with the {@link Match#orderID}
 	 */
 	@With private Collection<String> matchesIds;
 
