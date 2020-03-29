@@ -7,9 +7,6 @@ import org.influxdb.dto.Point;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.ZoneId;
-import java.util.concurrent.TimeUnit;
-
 @Service
 public class InfluxResponsesRepository implements ResponsesRepository {
 
@@ -22,7 +19,6 @@ public class InfluxResponsesRepository implements ResponsesRepository {
     public void save(Response response){
         var influxDB = connectToDB();
         var point = Point.measurement("responses")
-            .time(response.getLocalDateTime().atZone(ZoneId.systemDefault()).toEpochSecond(), TimeUnit.MILLISECONDS)
             .addField("response", response.getType().name())
             .build();
 
