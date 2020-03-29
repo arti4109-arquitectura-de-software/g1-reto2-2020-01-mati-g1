@@ -1,6 +1,6 @@
 package co.edu.uniandes.tianguix.engine.entrypoint;
 
-import co.edu.uniandes.tianguix.engine.model.MatchingResponse;
+import co.edu.uniandes.tianguix.engine.model.MatchingEngineResponse;
 import co.edu.uniandes.tianguix.engine.model.Order;
 import co.edu.uniandes.tianguix.engine.useCases.SendMatchingResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +40,10 @@ public class MachineEngineReceptor {
     public ResponseEntity processOrder(@RequestBody Order arrivedOrder){
         System.out.println("INSTANCE ID:" + environment.getProperty("eureka.instance.instance-id"));
         arrivedOrder.setProcessId(processedOrderId++);
-        MatchingResponse result = null;
+        ResponseEntity result = null;
         try {
             result = sendMatchingResult.sendResultToCollector(arrivedOrder);
-            return ResponseEntity.ok().body(result);
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
@@ -51,7 +51,7 @@ public class MachineEngineReceptor {
     }
 
     @PostMapping("/mockCollector")
-    public ResponseEntity collectAnswers(@RequestBody MatchingResponse response){
+    public ResponseEntity collectAnswers(@RequestBody MatchingEngineResponse response){
         return ResponseEntity.ok().body(response);
     }
 }

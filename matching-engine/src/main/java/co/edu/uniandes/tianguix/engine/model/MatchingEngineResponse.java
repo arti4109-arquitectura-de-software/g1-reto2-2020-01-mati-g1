@@ -8,7 +8,7 @@ import lombok.With;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MatchingResponse {
+public class MatchingEngineResponse {
     @With private String matchingEngineId;
     @With private Match matches[];
 }

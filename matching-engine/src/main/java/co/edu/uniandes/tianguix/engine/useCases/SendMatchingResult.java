@@ -3,19 +3,21 @@ package co.edu.uniandes.tianguix.engine.useCases;
 import co.edu.uniandes.tianguix.engine.model.*;
 import co.edu.uniandes.tianguix.engine.rest.ConciliatorClient;
 import co.edu.uniandes.tianguix.engine.service.DiscoveryService;
+import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-@PropertySource("classpath:application.properties")
 @Service
 public class SendMatchingResult {
+
+    @Qualifier("eurekaClient")
     @Autowired
-    private Environment environment;
+    EurekaClient eurekaClient;
     private final ConciliatorClient conciliatorClient;
 
     public SendMatchingResult(ConciliatorClient conciliatorClient, DiscoveryService discoveryService) {
@@ -23,16 +25,16 @@ public class SendMatchingResult {
     }
 
 
-    public MatchingResponse sendResultToCollector(Order order){
-        MatchingResponse matchingResponse = createResponseObject(order);
+    public ResponseEntity sendResultToCollector(Order order){
+        MatchingEngineResponse matchingResponse = createResponseObject(order);
         System.out.println("Matching Response Object = " + matchingResponse);
         System.out.println("Sending order to conciliator");
-        conciliatorClient.processOrder(matchingResponse);
-        return matchingResponse;
+        ResponseEntity responseEntity = conciliatorClient.processOrder(matchingResponse);
+        return responseEntity;
 
     }
 
-    private MatchingResponse createResponseObject(Order order) {
+    private MatchingEngineResponse createResponseObject(Order order) {
         int enginesConsensusGroups = 1;
         if( TianguixFeature.FAILURE.isActive() ) {
             enginesConsensusGroups = (int) (Math.random() * ((9) + 1) + 1);
@@ -51,7 +53,7 @@ public class SendMatchingResult {
             Match answerItem = new Match(order.getOrderId(), order.getType(), ordersId, votes);
             answers[i] = answerItem;
         }
-        MatchingResponse matchingResponseDTO = new MatchingResponse(environment.getRequiredProperty("engineId"), answers);
+        MatchingEngineResponse matchingResponseDTO = new MatchingEngineResponse(eurekaClient.getApplicationInfoManager().getInfo().getInstanceId(), answers);
 
         return matchingResponseDTO;
     }
