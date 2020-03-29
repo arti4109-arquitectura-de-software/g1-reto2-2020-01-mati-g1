@@ -31,6 +31,6 @@ slack.notification:
 
 influx:
   db:
-    host: localhost:8086
-    username: tianguix
-    password: tianguix
+    host: http://127.0.0.1:8086
+    username: root
+    password: root

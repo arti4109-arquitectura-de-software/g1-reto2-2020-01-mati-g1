@@ -17,8 +17,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class Conciliator {
 
 	public static void main(String[] args) {
-
-		var context = SpringApplication.run(Conciliator.class, args);
-		context.addApplicationListener(applicationEvent -> log.error("OFF --> {}", applicationEvent.toString()));
+		SpringApplication.run(Conciliator.class, args);
 	}
 }

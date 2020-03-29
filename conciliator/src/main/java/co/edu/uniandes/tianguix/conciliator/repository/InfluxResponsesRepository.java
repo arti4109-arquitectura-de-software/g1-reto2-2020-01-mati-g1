@@ -16,6 +16,7 @@ public class InfluxResponsesRepository implements ResponsesRepository {
     @Value("${influx.db.host}") private String databaseHost;
     @Value("${influx.db.username}") private String databaseUsername;
     @Value("${influx.db.password}") private String databasePassword;
+    @Value("${influx.db.database}") private String database;
 
     @Override
     public void save(Response response){
@@ -25,6 +26,7 @@ public class InfluxResponsesRepository implements ResponsesRepository {
             .addField("response", response.getType().name())
             .build();
 
+        influxDB.setDatabase(database);
         influxDB.write(point);
         influxDB.disableBatch();
         influxDB.close();
