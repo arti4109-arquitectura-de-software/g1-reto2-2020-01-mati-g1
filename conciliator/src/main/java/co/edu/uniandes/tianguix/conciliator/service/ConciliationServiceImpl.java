@@ -66,7 +66,7 @@ public class ConciliationServiceImpl implements ConciliationService {
 		if (conciliation.thereWasConsensus()) {
 			responsesRepository.save(response.withType(Type.SUCCESS));
 		} else {
-//			responsesRepository.save(response.withType(Type.FAIL));
+			responsesRepository.save(response.withType(Type.FAIL));
 			notifyConciliationFailure(conciliation);
 		}
 	}

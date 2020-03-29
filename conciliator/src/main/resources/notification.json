@@ -11,12 +11,21 @@
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": "*Matching Engine Id:*\nmatchingEngineId\n*When:*\ndate\n*Order Id:*\n orderId"
-      },
-      "accessory": {
-        "type": "image",
-        "image_url": "https://s3.amazonaws.com/vu-web/wp-content/uploads/20160810143712/alert-icon-red-11.png",
-        "alt_text": "computer thumbnail"
+        "text": "*Matching Engine Id:*\nmatchingEngineId"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*When:*\ndate"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Order Id:*\n orderId"
       }
     },
     {
@@ -27,7 +36,7 @@
           "text": {
             "type": "plain_text",
             "emoji": true,
-            "text": "Approve"
+            "text": "Mark as read"
           },
           "style": "primary",
           "value": "click_me_123"
@@ -37,7 +46,7 @@
           "text": {
             "type": "plain_text",
             "emoji": true,
-            "text": "Deny"
+            "text": "Delete"
           },
           "style": "danger",
           "value": "click_me_123"

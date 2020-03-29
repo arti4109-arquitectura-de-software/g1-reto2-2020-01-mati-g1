@@ -1,6 +1,7 @@
-
 version: '2'
+
 services:
+
   influxdb:
     image: influxdb:latest
     ports:
@@ -11,6 +12,7 @@ services:
       - INFLUXDB_DB=tianguix
       - INFLUXDB_ADMIN_USER=${INFLUXDB_USERNAME}
       - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
+
   chronograf:
     image: chronograf:latest
     ports:
@@ -23,6 +25,7 @@ services:
       - INFLUXDB_URL=http://influxdb:8086
       - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
+
   grafana:
     image: grafana/grafana:latest
     ports:
@@ -35,6 +38,7 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+
 volumes:
   influxdb-storage:
   chronograf-storage:
