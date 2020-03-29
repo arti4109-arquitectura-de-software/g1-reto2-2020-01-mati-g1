@@ -27,7 +27,7 @@ management:
         include: '*'
 
 slack.notification:
-  server: https://hooks.slack.com/services/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
+  server: https://hooks.slack.com/services/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
 
 influx:
   db:

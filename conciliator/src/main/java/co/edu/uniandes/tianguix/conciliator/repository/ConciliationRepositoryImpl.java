@@ -8,8 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -71,15 +70,17 @@ public class ConciliationRepositoryImpl implements ConciliationRepository {
 				() -> conciliationMap.put(orderId, makeConciliationForResponse(orderId, response)));
 	}
 
-	@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 	private Conciliation makeConciliationForResponse(String orderId, MatchingEngineResponse response) {
 
 		log.debug("Creating conciliation for order id: '{}'", orderId);
+
+		var responses = new ArrayList<MatchingEngineResponse>();
+		responses.add(response);
 
 		return new Conciliation()
 				.withOrderId(orderId)
 				.withStatus(ConciliationStatus.CREATED)
 				.withLocalDateTime(LocalDateTime.now())
-				.withResponsesToReconcile(Arrays.asList(response));
+				.withResponsesToReconcile(responses);
 	}
 }

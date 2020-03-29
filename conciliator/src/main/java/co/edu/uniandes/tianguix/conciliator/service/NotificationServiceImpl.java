@@ -2,11 +2,10 @@ package co.edu.uniandes.tianguix.conciliator.service;
 
 import co.edu.uniandes.tianguix.conciliator.model.FailureNotification;
 import co.edu.uniandes.tianguix.conciliator.rest.SlackClient;
-import feign.Feign;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
@@ -15,27 +14,16 @@ import java.util.stream.Collectors;
  * @author <a href="mailto:d.bellonc@uniandes.edu.co"> Daniel Bellón </a>
  * @since 0.0.1
  */
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class NotificationServiceImpl implements NotificationService {
 
 	// -----------------------------------------------------------------------------------------------------------------
 	// Attributes
 	// -----------------------------------------------------------------------------------------------------------------
 
-	@Value("${slack.notification.server}")
-	private String slackUrl;
-
-	private SlackClient slackClient;
-
-	// -----------------------------------------------------------------------------------------------------------------
-	// Init Methods
-	// -----------------------------------------------------------------------------------------------------------------
-
-	@PostConstruct
-	public void init() {
-
-		slackClient = Feign.builder().target(SlackClient.class, slackUrl);
-	}
+	private final SlackClient slackClient;
 
 	// -----------------------------------------------------------------------------------------------------------------
 	// Methods

@@ -27,7 +27,6 @@ public class ConciliationController {
 	// -----------------------------------------------------------------------------------------------------------------
 
 	private final ConciliationService conciliationService;
-	private final ResponsesRepository repository;
 
 	// -----------------------------------------------------------------------------------------------------------------
 	// Methods
