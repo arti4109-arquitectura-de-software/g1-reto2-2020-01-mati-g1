@@ -27,7 +27,7 @@ El **Conciliador** deberá esperar las respuestas de las instancias del **Motor 
 
 Una vez estén levantados todos los servicios, se introducirá una falla en el **Motor de Emparejamiento**, la falla será introducida gracias a un **feature flag** que nos permitirá en ejecución cambiar el comportamiento del algoritmo de emparejamiento, con este comportamiento esperamos comprobar la efectividad en la detección de fallas asociadas al proceso de emparejamiento.
 
-![Diagrama no disponible](docs/diagrama-componentes-emparejador.png) "Diagrama de componentes")
+![Diagrama no disponible](docs/diagrama-componentes-emparejador.png "Diagrama de componentes")
 
 ## Resultados Esperados
 
