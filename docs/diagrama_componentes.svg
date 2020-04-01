@@ -342,4 +342,10 @@
         <path d="M 607 113 C 598.72 113 592 106.28 592 98 C 592 89.72 598.72 83 607 83" fill="none" stroke="#000000"
               stroke-miterlimit="10" pointer-events="none"/>
     </g>
+    <g fill="#787878" font-family="Arial,Helvetica" font-size="12px">
+
+    </g>
+    <g fill="#787878" font-family="Arial,Helvetica" text-anchor="end" font-size="12px">
+
+    </g>
 </svg>
