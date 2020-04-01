@@ -44,8 +44,8 @@ La evidencia de la ejecución del experimento se puede ver en el siguiente video
 - Java 13 como lenguaje de programación
 - [InfluxDB](https://grafana.com/) para la implementación del modelo de actores
 - [Grafana](https://www.influxdata.com/) para la ejecución de las pruebas de carga
-- [Spring Cloud Netflix] (https://spring.io/projects/spring-cloud-netflix) para la creación del registry, clientes rest, y descubriminetos de servicios.
-- [Docker](https://www.docker.com/) para ejecutar los servicios de [InfluxDB](https://grafana.com/) y Grafana](https://www.influxdata.com/)
+- [Spring Cloud Netflix](https://spring.io/projects/spring-cloud-netflix) para la creación del registry, clientes rest, y descubriminetos de servicios.
+- [Docker](https://www.docker.com/) para ejecutar los servicios de [InfluxDB](https://grafana.com/) y [Grafana](https://www.influxdata.com/)
 
 ## Ejecución del experimento
 
