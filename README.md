@@ -11,11 +11,6 @@ de dar contexto sobre las motivaciones que nos llevaron a tomar las decisiones d
 
 ![ASR no disponible](docs/ASR.png "ASR")
 
-## Descripción del experimento
-
-El estilo de arquitectura predominante que dirigió nuestro diseño es de tipo **Microservicios**,
-para poder satisfacer el ASR descrito anteriormente, decidimos aplicar las tacticas de **Voting, Health check, descubrimiento de servicos y replicación** en nuestro **Motor de Emparejamiento**. Nuestro experimento pretende disipar las dudas y reducir la incertidumbre asociada a la detección de fallas en un sistema de voting, y de esa manera determinar 
-si las decisiones tomadas nos ayudarán a favorecer la disponibilidad asociada al ASR seleccionado.
 
 ## Componente a probar
 
@@ -24,14 +19,15 @@ cuya composición interna se detalla en el siguiente diagrama de componentes:
 
 ![Diagrama no disponible](docs/diagrama-componentes.png "Diagrama de componentes")
 
-## Diseño del experimento
+## Descripción del experimento
 
-El experimento esta formado por tres microservicios **order-manager, matching-engine (dos instancias), conciliator** que se registran en el servicio
-**registry**, el cual tiene la responsabilidad de hacer el Health Check y brindar la información para el descubrimiento de los servicios que se suscriben a el. 
+La ejecución del experimento consistirá en mandarle carga al **Administrador de Órdenes**, quien tendrá que comunicarse con **Eureka** para saber cuantas instancias del **Motor de Emparejamiento**  se están ejecutando, una vez se obtenga el número de instancias, la petición original deberá ser clasificada y reenviada a todas las instancias del **Motor de Emparejamiento**, quien a su vez, tendrá que generar una respuesta y enviársela al **Conciliador**.
 
-Una vez todos los serivicios se encuentren disponibles se envia una orden por medio del **order-manager** el cual se la comunica a todas las instancias disponibles de **matching-engine**, de tal forma que se este ejecuta el proceso de emparejamiento con 10 hilos para comunicarle al **conciliator** el resultado del emparejamiento. El conciliator al tener las respuestas de todas las instancias de **matching-engine** determina si hay un consenso en las respuestas o si se presento alguna falla, por ultimo registra la determinación tomada en la base de datos InfluxDB y notificando a un canal de Slack si es el caso de una falla. 
+El Conciliador deberá esperar las respuestas de las instancias del Motor de Emparejamiento que estén en ejecución y para saber cuantas respuestas tiene que esperar, tendrá que comunicarse con Eureka. Si no hay consenso en las respuestas recibidas, se tendrá que notificar la falla a Slack.
 
-Para porder evidenciar el registro de las fallas se utiliza Grafana, que nos permite graficar los datos registrados en series de tiempo.
+Una vez estén levantados todos los servicios, se introducirá una falla en el Motor de Emparejamiento, la falla será introducida gracias a un feature flag que nos permitirá en ejecución cambiar el comportamiento del algoritmo de emparejamiento, con este comportamiento esperamos comprobar la efectividad en la detección de fallas asociadas al proceso de emparejamiento.
+
+En las siguientes diapositivas se muestra la evidencia del experimento y sus respectivos resultados.
 
 ![Diagrama no disponible](docs/diagrama-componentes-emparejador.png) "Diagrama de componentes")
 
