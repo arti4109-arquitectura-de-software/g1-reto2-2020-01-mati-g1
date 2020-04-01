@@ -23,11 +23,9 @@ cuya composición interna se detalla en el siguiente diagrama de componentes:
 
 La ejecución del experimento consistirá en mandarle carga al **Administrador de Órdenes**, quien tendrá que comunicarse con **Eureka** para saber cuantas instancias del **Motor de Emparejamiento**  se están ejecutando, una vez se obtenga el número de instancias, la petición original deberá ser clasificada y reenviada a todas las instancias del **Motor de Emparejamiento**, quien a su vez, tendrá que generar una respuesta y enviársela al **Conciliador**.
 
-El Conciliador deberá esperar las respuestas de las instancias del Motor de Emparejamiento que estén en ejecución y para saber cuantas respuestas tiene que esperar, tendrá que comunicarse con Eureka. Si no hay consenso en las respuestas recibidas, se tendrá que notificar la falla a Slack.
+El **Conciliador** deberá esperar las respuestas de las instancias del **Motor de Emparejamiento** que estén en ejecución y para saber cuantas respuestas tiene que esperar, tendrá que comunicarse con Eureka. Si no hay consenso en las respuestas recibidas, se tendrá que notificar la falla a Slack.
 
-Una vez estén levantados todos los servicios, se introducirá una falla en el Motor de Emparejamiento, la falla será introducida gracias a un feature flag que nos permitirá en ejecución cambiar el comportamiento del algoritmo de emparejamiento, con este comportamiento esperamos comprobar la efectividad en la detección de fallas asociadas al proceso de emparejamiento.
-
-En las siguientes diapositivas se muestra la evidencia del experimento y sus respectivos resultados.
+Una vez estén levantados todos los servicios, se introducirá una falla en el **Motor de Emparejamiento**, la falla será introducida gracias a un **feature flag** que nos permitirá en ejecución cambiar el comportamiento del algoritmo de emparejamiento, con este comportamiento esperamos comprobar la efectividad en la detección de fallas asociadas al proceso de emparejamiento.
 
 ![Diagrama no disponible](docs/diagrama-componentes-emparejador.png) "Diagrama de componentes")
 
