@@ -22,7 +22,7 @@ si las decisiones tomadas nos ayudarán a favorecer la disponibilidad asociada a
 Como se mencionó en el apartado inmediatamente anterior, el experimento gira en torno al **Motor de Emparejamiento**,
 cuya composición interna se detalla en el siguiente diagrama de componentes:
 
-![Diagrama no disponible](docs/diagrama-componentes.png "Diagrama de componentes")
+![Diagrama no disponible](docs/diagrama_de_componentes_general.svg "Diagrama de componentes")
 
 ## Diseño del experimento
 
@@ -33,7 +33,7 @@ Una vez todos los serivicios se encuentren disponibles se envia una orden por me
 
 Para porder evidenciar el registro de las fallas se utiliza Grafana, que nos permite graficar los datos registrados en series de tiempo.
 
-![Diagrama no disponible](docs/diagrama-componentes-emparejador.png "Diagrama de componentes")
+![Diagrama no disponible](docs/diagrama_de_componentes-emparejador.svg) "Diagrama de componentes")
 
 ## Resultados Esperados
 
@@ -43,7 +43,7 @@ Para porder evidenciar el registro de las fallas se utiliza Grafana, que nos per
 
 La evidencia de la ejecución del experimento se puede ver en el siguiente video:
 
-[![IMAGE ALT TEXT HERE](docs/video.png)](https://youtu.be/ByDKDekzD4U)
+[![IMAGE ALT TEXT HERE](docs/video.png)](https://youtu.be/rFCCOnK-FDY)
 
 ## Tecnologías y frameworks utilizados
 
