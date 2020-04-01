@@ -33,7 +33,7 @@ Una vez todos los serivicios se encuentren disponibles se envia una orden por me
 
 Para porder evidenciar el registro de las fallas se utiliza Grafana, que nos permite graficar los datos registrados en series de tiempo.
 
-![Diagrama no disponible](docs/diagrama-componentes-emparejador.svg) "Diagrama de componentes")
+![Diagrama no disponible](docs/diagrama-componentes-emparejador.svg "Diagrama de componentes")
 
 ## Resultados Esperados
 
